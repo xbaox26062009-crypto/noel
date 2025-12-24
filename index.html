@@ -1,0 +1,48 @@
+index.html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quà Giáng Sinh Bất Ngờ</title>
+    <style>
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #000; overflow: hidden; font-family: sans-serif; }
+        .gift-box { position: relative; width: 120px; height: 120px; background: #d32f2f; cursor: pointer; transition: 0.5s; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .gift-box::before { content: ''; position: absolute; width: 20px; height: 100%; background: #ffd700; left: 50%; transform: translateX(-50%); }
+        .gift-box::after { content: ''; position: absolute; width: 100%; height: 20px; background: #ffd700; top: 50%; transform: translateY(-50%); }
+        .lid { position: absolute; width: 140px; height: 30px; background: #b71c1c; top: -10px; left: -10px; z-index: 2; transition: 0.5s; }
+        #message { display: none; text-align: center; color: white; animation: zoom 1s ease; }
+        h1 { color: #ffeb3b; text-shadow: 0 0 10px red; }
+        @keyframes zoom { from { transform: scale(0); } to { transform: scale(1); } }
+        .snow { position: absolute; color: white; top: -20px; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(100vh); } }
+    </style>
+</head>
+<body>
+    <div id="gift" class="gift-box" onclick="openGift()">
+        <div class="lid" id="lid"></div>
+    </div>
+    <div id="message">
+        <h1>Merry Christmas! 🎄</h1>
+        <p>Chúc bạn một mùa Giáng Sinh ấm áp!</p>
+        <p>🎁✨🎅</p>
+    </div>
+    <audio id="music" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
+    <script>
+        function openGift() {
+            document.getElementById('lid').style.transform = 'translateY(-100px)';
+            setTimeout(() => {
+                document.getElementById('gift').style.display = 'none';
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('music').play();
+            }, 500);
+        }
+        function createSnow() {
+            const s = document.createElement('div'); s.className = 'snow'; s.innerHTML = '❄';
+            s.style.left = Math.random() * 100 + 'vw'; s.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(s); setTimeout(() => s.remove(), 5000);
+        }
+        setInterval(createSnow, 200);
+    </script>
+</body>
+</html>
